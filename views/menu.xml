@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="hotel_menu_restaurant"
+              name="Restaurant"
+              parent="hotel_management.hotel_menu_root"/>
+
+    <record id="view_menu_form" model="ir.ui.view">
+        <field name="name">view.menu.form</field>
+        <field name="model">food.menu</field>
+        <field name="arch" type="xml">
+            <form string="Menu">
+
+                    <sheet>
+                        <field name="name"/>
+                        <field name="price"/>
+                    </sheet>
+            </form>
+            </field>
+    </record>
+    <record id="view_menu_list" model="ir.ui.view">
+        <field name="name">view.menu.list</field>
+        <field name="model">food.menu</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="price"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_menu" model="ir.actions.act_window">
+        <field name="name">Menu</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">food.menu</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_view_menu_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hotel_management.view_menu_list"/>
+        <field name="act_window_id" ref="action_menu"/>
+    </record>
+    <record id="view_menu_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hotel_management.view_menu_form"/>
+        <field name="act_window_id" ref="action_menu"/>
+    </record>
+
+        <menuitem id="hotel_restaurant"
+                  name="Menu"
+                  parent="hotel_management.hotel_menu_restaurant"
+                  action="hotel_management.action_menu"/>
+
+</odoo>
+

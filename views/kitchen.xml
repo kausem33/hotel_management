@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="hotel_menu_restaurant"
+              name="Restaurant"
+              sequence="2" parent="hotel_management.hotel_menu_root"/>
+
+    <record id="view_kitchen_form" model="ir.ui.view">
+        <field name="name">hotel.kitchen.form</field>
+        <field name="model">kitchen.product</field>
+        <field name="arch" type="xml">
+            <form string="kitchenproduct">
+
+                   <sheet>
+                        <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="expiry"/>
+                            <field name="weight"/>
+                        </group>
+                        <group>
+                            <field name="count"/>
+                            <field name="is_refrigerated"/>
+                        </group>
+                        </group>
+                   </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="view_kitchen_list" model="ir.ui.view">
+        <field name="name">view.kitchen.list</field>
+        <field name="model">kitchen.product</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="expiry"/>
+                <field name="weight"/>
+                <field name="count"/>
+                <field name="is_refrigerated"/>
+            </tree>
+        </field>
+    </record>
+    <record id="action_kitchen" model="ir.actions.act_window">
+        <field name="name">Kitchen_product</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">kitchen.product</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <record id="action_view_kitchen_tree" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="hotel_management.view_kitchen_list"/>
+        <field name="act_window_id" ref="action_kitchen"/>
+    </record>
+    <record id="action_view_menu_form" model="ir.actions.act_window.view">
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="hotel_management.view_kitchen_form"/>
+        <field name="act_window_id" ref="action_kitchen"/>
+    </record>
+
+    <menuitem id="hotel_kitchen_product"
+              name="Kitchenproduct"
+              parent="hotel_management.hotel_menu_restaurant"
+              action="hotel_management.action_kitchen"/>
+</odoo>
+
